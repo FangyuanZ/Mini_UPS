@@ -1,0 +1,52 @@
+syntax = "proto2";
+
+message AWarehouse{
+    required int32 id = 1;
+    required int32 x = 2;
+    required int32 y = 3;
+    }
+
+message ASendTruck{
+    required AWarehouse whs = 1;
+    repeated APackageInfo packages = 2;
+    }
+
+message APackageInfo{
+    required int64 packageid = 1;
+    required int32 x = 2;
+    required int32 y = 3;
+    optional string ups_user_name = 4;
+    }
+
+message UTruckSent{
+    required int32 truckid = 1;
+    repeated APackageInfo packages = 2;
+    }
+
+message UTruckArrived{
+    required int32 truckid = 1;
+    }
+
+message AStartDelivery{
+    required int32 truckid = 1;
+    repeated APackageInfo packages = 2;
+    }
+
+message UDelivered{
+    required int64 shipid = 1;
+    }
+
+message USendWorldID{
+    required int32 worldid = 1;
+    }
+
+message AtoUCommands{
+    repeated ASendTruck sendtrucks = 1;
+    repeated AStartDelivery startdelivery = 2;
+    }
+
+message UtoAResponses{
+    repeated UTruckSent trucksent = 1;
+    repeated UTruckArrived arrived = 2;
+    repeated UDelivered delivered = 3;
+    }

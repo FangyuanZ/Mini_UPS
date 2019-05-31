@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Welcome to UPS</title>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label><font size=14>Log into your account</font></label><br>
+            <label>Username</label>
+            <input type="text" class="form-control" placeholder="Username" name = "username">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" placeholder="Password" name = "password">
+          </div>
+          <button type="submit" class="btn btn-primary" name="login">Login</button>
+          <button type="submit" class="btn btn-primary" name="register">Do not have an account? Register</button>
+          <button type="submit" class="btn btn-primary" name="reset">Forgot your password? Reset!</button>
+        </form>
+    <!-- </div>
+    <div class="container"> -->
+
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label><font size=14>Track your package</font></label><br>
+            <label><font size = 4>You can login to see all your packages and change destination of your on-delivery packages!</font></label>
+            <input type="text" class="form-control" placeholder="package id" name = "package_id">
+          </div>
+
+
+
+          <button type="submit" class="btn btn-primary" name="track">Track your package!</button>
+          <button type="submit" class="btn btn-primary" name="clear">Clear</button><br>
+        
+          {% if all_info %}
+          <label><font size = 4>Here is your package information!</font></label><br>
+          <div class="container">
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">package_id</th>
+                  <th scope="col">destination_x</th>
+                  <th scope="col">destination_y</th>
+                  <th scope="col">status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for things in all_info %}
+                <tr>
+                  <th scope="row">{{things.package_id}}</th>
+                  <td>{{things.dest_x}}</td>
+                  <td>{{things.dest_y}}</td>
+                  <td>{{things.get_package_status_display}}</td>
+                </tr>
+                {% endfor %}
+  
+              </tbody>
+            </table>
+          </div> 
+          {% endif %}
+        </form>
+
+    <!-- </div> -->
+
+
+
+  </body>  
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
